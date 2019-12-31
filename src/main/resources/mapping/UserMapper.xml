@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatisdemo.mapper.UserMapper">
+
+    <select id="listUsers" resultType="com.example.mybatisdemo.entity.User">
+        select * from t_user
+    </select>
+
+    <select id="findUserByName" resultType="com.example.mybatisdemo.entity.User">
+        select * from t_user where userName = #{userName}
+    </select>
+
+    <select id="findUserByLoginName" resultType="com.example.mybatisdemo.entity.User">
+        select * from t_user where userLoginName = #{userLoginName}
+    </select>
+
+    <select id="login" resultType="com.example.mybatisdemo.entity.User">
+        select * from t_user where userLoginName = #{userLoginName} and passWord = #{passWord}
+    </select>
+
+    <insert id="insertUser" useGeneratedKeys="true">
+      insert into t_user(userName, passWord, userLoginName, gender)
+      values (#{userName},#{passWord},#{userLoginName},#{gender})
+    </insert>
+
+    <delete id="deleteUserForName">
+      delete from t_user where userName = #{userName}
+    </delete>
+
+    <update id="updateUserInfoForName">
+      update t_user set userLoginName = #{userLoginName}, passWord = #{passWord},
+      gender = #{gender}, recentLogin = #{recentLogin} where userName = #{userName}
+    </update>
+</mapper>
