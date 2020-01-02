@@ -1,6 +1,8 @@
 package com.example.mybatisdemo.controller;
 
+import com.example.mybatisdemo.entity.Notify;
 import com.example.mybatisdemo.entity.User;
+import com.example.mybatisdemo.mapper.NotifyMapper;
 import com.example.mybatisdemo.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,10 +13,13 @@ import java.util.List;
 
 //用来测试crud操作的接口，不需要返回response
 @RestController
-public class UserController {
+public class TestController {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    NotifyMapper notifyMapper;
 
     @GetMapping(path = "listUsers")
     public List<User> listUsers() {
@@ -46,4 +51,13 @@ public class UserController {
         userMapper.updateUserInfoForName(userLoginName, passWord, gender, userName, recentLogin);
     }
 
+    @GetMapping(path = "listNotifies")
+    public List<Notify> listNotifies() {
+        return notifyMapper.listNotifies();
+    }
+
+    @GetMapping(path = "insertNotify")
+    public void insertNotify(String title, String content, String author, String publishDate) {
+        notifyMapper.insertNotify(title, content, author, publishDate);
+    }
 }

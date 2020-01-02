@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatisdemo.mapper.NotifyMapper">
+
+    <select id="listNotifies" resultType="com.example.mybatisdemo.entity.Notify">
+        select * from t_notify
+    </select>
+
+    <select id="findNotifyByTitle" resultType="com.example.mybatisdemo.entity.Notify">
+        select * from t_notify where title = #{title}
+    </select>
+
+    <select id="findNotifyByAuthor" resultType="com.example.mybatisdemo.entity.Notify">
+        select * from t_notify where author = #{author}
+    </select>
+
+    <insert id="insertNotify" useGeneratedKeys="true">
+      insert into t_notify(title, content, author, publishDate)
+      values (#{title},#{content},#{author},#{publishDate})
+    </insert>
+
+    <delete id="deleteUserForName">
+      delete from t_user where userName = #{userName}
+    </delete>
+
+    <update id="updateUserInfoForName">
+      update t_user set userLoginName = #{userLoginName}, passWord = #{passWord},
+      gender = #{gender}, recentLogin = #{recentLogin} where userName = #{userName}
+    </update>
+</mapper>
