@@ -46,7 +46,7 @@ public class IndexController {
         return response;
     }
 
-    private boolean checkLogin(HttpSession session){
+    static boolean checkLogin(HttpSession session){
         User user = (User) session.getAttribute("user");
         System.out.println("当前用户："+ user);
         return (user == null);

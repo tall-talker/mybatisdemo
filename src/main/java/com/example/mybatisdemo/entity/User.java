@@ -6,7 +6,6 @@ public class User {
     private String userLoginName;
     private String passWord;
     private String gender;
-    private Boolean isLogin;
 
     public User() {
     }
