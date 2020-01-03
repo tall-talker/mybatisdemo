@@ -24,8 +24,10 @@
       values (#{userName},#{passWord},#{userLoginName},#{gender})
     </insert>
 
-    <delete id="deleteUserForName">
-      delete from t_user where userName = #{userName}
+<!--  注意删除操作，只能参考id作为查询条件，如果参考其他的可能会有重复的列，那么就删除了多条数据了  -->
+
+    <delete id="deleteUserForId">
+      delete from t_user where id = #{id}
     </delete>
 
     <update id="updateUserInfoForName">

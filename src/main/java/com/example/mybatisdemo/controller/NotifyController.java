@@ -42,22 +42,32 @@ public class NotifyController {
             User user = (User) session.getAttribute("user");
             String author =   user.getUserName();
             String createDate = new Date().toString();
+            response.setSuccess(true);
+
+            if("".equals(title)){
+                response.setMessage("标题格式错误");
+                return response;
+            }
+            if("".equals(content)){
+                response.setMessage("内容格式错误");
+                return response;
+            }
+
             notifyMapper.insertNotify(title, content, author, createDate);
             response.setMessage("创建成功");
-            response.setSuccess(true);
         }
         return response;
     }
 
     @GetMapping(path = "deleteNotify")
-    public Response deleteNotify(String title, HttpSession session) {
+    public Response deleteNotify(int id, HttpSession session) {
         Response response = new Response();
         response.setSuccess(false);
         if(checkLogin(session)){
             response.setMessage("登录失效或者未登录");
         }else {
             response.setSuccess(true);
-            notifyMapper.deleteNotifyForTitle(title);
+            notifyMapper.deleteNotifyForId(id);
         }
         return response;
     }

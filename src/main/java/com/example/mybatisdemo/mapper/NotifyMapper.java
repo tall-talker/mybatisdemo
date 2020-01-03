@@ -17,7 +17,7 @@ public interface NotifyMapper {
     //title, content, author, publishDate
     void insertNotify(String title, String content, String author, String publishDate);
 
-    void deleteNotifyForTitle(String title);
+    void deleteNotifyForId(int id);
 
     void updateNotifyForTitle(String title, String content);
 }

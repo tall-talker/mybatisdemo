@@ -2,6 +2,7 @@ package com.example.mybatisdemo.entity;
 
 //用户实体
 public class User {
+    private int id;
     private String userName;
     private String userLoginName;
     private String passWord;
@@ -10,11 +11,12 @@ public class User {
     public User() {
     }
 
-    public User(String userName, String userLoginName, String passWord, String gender) {
-        this.userName = userName;
-        this.userLoginName = userLoginName;
-        this.passWord = passWord;
-        this.gender = gender;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUserName() {

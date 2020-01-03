@@ -34,14 +34,14 @@ public class IndexController {
     }
 
     @GetMapping(path = "deleteUser")
-    public Response deleteUser(String userName, HttpSession session) {
+    public Response deleteUser(int id, HttpSession session) {
         Response response = new Response();
         response.setSuccess(false);
         if(checkLogin(session)){
             response.setMessage("登录失效或者未登录");
         }else {
             response.setSuccess(true);
-            userMapper.deleteUserForName(userName);
+            userMapper.deleteUserForId(id);
         }
         return response;
     }

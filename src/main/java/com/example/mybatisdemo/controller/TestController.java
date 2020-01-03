@@ -41,9 +41,9 @@ public class TestController {
         userMapper.insertUser(userName, passWord, userLoginName, gender);
     }
 
-    @GetMapping(path = "deleteUserForName")
-    public void deleteUserForName(String userName) {
-        userMapper.deleteUserForName(userName);
+    @GetMapping(path = "deleteUserForId")
+    public void deleteUserForName(int id) {
+        userMapper.deleteUserForId(id);
     }
 
     @GetMapping(path = "updateUserInfoForName")

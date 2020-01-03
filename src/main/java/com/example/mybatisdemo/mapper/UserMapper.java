@@ -15,7 +15,7 @@ public interface UserMapper {
 
     void insertUser(String userName, String passWord, String userLoginName, String gender);
 
-    void deleteUserForName(String userName);
+    void deleteUserForId(int id);
 
     void updateUserInfoForName(String userLoginName, String passWord, String gender, String userName, String recentLogin);
 

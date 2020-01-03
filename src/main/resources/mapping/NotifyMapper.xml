@@ -20,8 +20,8 @@
       values (#{title},#{content},#{author},#{publishDate})
     </insert>
 
-    <delete id="deleteNotifyForTitle">
-      delete from t_notify where title = #{title}
+    <delete id="deleteNotifyForId">
+      delete from t_notify where id = #{id}
     </delete>
 
     <update id="updateUserInfoForName">

@@ -2,11 +2,23 @@ package com.example.mybatisdemo.entity;
 
 //公告实体
 public class Notify {
-
+    private int id;
     private String title;
     private String content;
     private String author;
     private String publishDate;
+
+    public Notify(){
+
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
