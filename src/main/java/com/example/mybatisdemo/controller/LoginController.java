@@ -27,16 +27,11 @@ public class LoginController {
         Response response = new Response();
         response.setSuccess(false);
 
-        if(userLoginName == null || passWord == null){
-            response.setMessage("参数错误");
-            return response;
-        }
-
         List<User> login = userMapper.login(userLoginName, passWord);
 
         if(login.size() == 1){
             User user = login.get(0);
-            session.setAttribute("user",user);
+            session.setAttribute("user", user);
             String loginTime = new Date().toString();
 
             userMapper.updateUserInfoForName(user.getUserLoginName(), user.getPassWord(),
@@ -49,22 +44,6 @@ public class LoginController {
         }
 
         return  response;
-    }
-
-    @ResponseBody
-    @GetMapping(path = "refreshAccount")
-    public Response refreshAccount(HttpSession session){
-        User user = (User) session.getAttribute("user");
-        Response response = new Response();
-        response.setSuccess(true);
-        response.setData(user);
-
-        if(user == null){
-            response.setMessage("登录失效");
-        }else{
-            user.setPassWord("**********");
-        }
-        return response;
     }
 
     @ResponseBody

@@ -11,6 +11,14 @@ public class User {
     public User() {
     }
 
+    public User(User another) {
+        this.setUserName(another.getUserName());
+        this.setPassWord(another.getPassWord());
+        this.setGender(another.getGender());
+        this.setUserLoginName(another.getUserLoginName());
+        this.setId(another.getId());
+    }
+
     public int getId() {
         return id;
     }
@@ -49,5 +57,16 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", userLoginName='" + userLoginName + '\'' +
+                ", passWord='" + passWord + '\'' +
+                ", gender='" + gender + '\'' +
+                '}';
     }
 }

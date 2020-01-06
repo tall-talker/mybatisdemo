@@ -6,6 +6,7 @@ import com.example.mybatisdemo.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -82,9 +83,30 @@ public class IndexController {
 
             response.setSuccess(true);
             User user = (User) session.getAttribute("user");
+            System.out.println(user.toString());
 
             userMapper.updateUserInfoForName(user.getUserLoginName(), user.getPassWord(), user.getGender(), userName, null);
             response.setMessage("修改成功");
+        }
+        return response;
+    }
+
+    @ResponseBody
+    @GetMapping(path = "refreshAccount")
+    public Response refreshAccount(HttpSession session){
+        User user = (User) session.getAttribute("user");
+
+        Response response = new Response();
+        response.setSuccess(true);
+        response.setData(user);
+
+        if(user == null){
+            response.setMessage("登录失效");
+        }else{
+            //这里新建一个another对象相当于复制，直接调用user的setter会修改session中的值！！！
+            User another = new User(user);
+            another.setPassWord("**********");
+            response.setData(another);
         }
         return response;
     }
