@@ -31,7 +31,7 @@
     </delete>
 
     <update id="updateUserInfoForName">
-      update t_user set userLoginName = #{userLoginName}, passWord = #{passWord},
-      gender = #{gender}, recentLogin = #{recentLogin} where userName = #{userName}
+      update t_user set userName = #{userName}, passWord = #{passWord},
+      gender = #{gender}, recentLogin = #{recentLogin} where userLoginName = #{userLoginName}
     </update>
 </mapper>

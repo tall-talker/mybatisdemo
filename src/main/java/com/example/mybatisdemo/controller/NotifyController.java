@@ -52,7 +52,6 @@ public class NotifyController {
                 response.setMessage("内容格式错误");
                 return response;
             }
-
             notifyMapper.insertNotify(title, content, author, createDate);
             response.setMessage("创建成功");
         }

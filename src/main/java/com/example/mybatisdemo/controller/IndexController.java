@@ -46,6 +46,49 @@ public class IndexController {
         return response;
     }
 
+    @GetMapping(path = "updatePassword")
+    public Response updatePassword(String password, HttpSession session) {
+        Response response = new Response();
+        response.setSuccess(false);
+        if(checkLogin(session)){
+            response.setMessage("登录失效或者未登录");
+        }else {
+            if("".equals(password) || password.length() < 6){
+                response.setMessage("请输入新密码");
+                return response;
+            }
+
+            response.setSuccess(true);
+            User user = (User) session.getAttribute("user");
+
+            userMapper.updateUserInfoForName(user.getUserLoginName(), password, user.getGender(), user.getUserName(), null);
+            session.setAttribute("user",null);
+            response.setMessage("修改成功，请重新登录");
+        }
+        return response;
+    }
+
+    @GetMapping(path = "updateUserName")
+    public Response updateUserName(String userName, HttpSession session) {
+        Response response = new Response();
+        response.setSuccess(false);
+        if(checkLogin(session)){
+            response.setMessage("登录失效或者未登录");
+        }else {
+            if("".equals(userName) || userName.length() < 6){
+                response.setMessage("请输入新用户名");
+                return response;
+            }
+
+            response.setSuccess(true);
+            User user = (User) session.getAttribute("user");
+
+            userMapper.updateUserInfoForName(user.getUserLoginName(), user.getPassWord(), user.getGender(), userName, null);
+            response.setMessage("修改成功");
+        }
+        return response;
+    }
+
     static boolean checkLogin(HttpSession session){
         User user = (User) session.getAttribute("user");
         System.out.println("当前用户："+ user);

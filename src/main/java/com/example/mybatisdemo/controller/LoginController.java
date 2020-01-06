@@ -4,19 +4,13 @@ import com.example.mybatisdemo.entity.Response;
 import com.example.mybatisdemo.entity.User;
 import com.example.mybatisdemo.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.print.DocFlavor;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 //处理登录，注册，登出请求
 //注意线上的应用用户密码要经过加密，绝对不允许存明文
@@ -29,8 +23,7 @@ public class LoginController {
 
     @ResponseBody
     @GetMapping(path = "login")
-    public Response login(String userLoginName, String passWord,
-                          HttpSession session, HttpServletResponse hsResponse){
+    public Response login(String userLoginName, String passWord, HttpSession session){
         Response response = new Response();
         response.setSuccess(false);
 
@@ -76,8 +69,8 @@ public class LoginController {
 
     @ResponseBody
     @GetMapping(path = "logout")
-    public Response logout(HttpServletRequest request){
-        request.getSession().setAttribute("user",null);
+    public Response logout(HttpSession session){
+        session.setAttribute("user",null);
         Response response = new Response();
         response.setSuccess(true);
         return response;
@@ -96,12 +89,6 @@ public class LoginController {
         Response response = new Response();
         response.setSuccess(true);
         StringBuffer message = new StringBuffer("");
-
-        if(userName == null || passWord == null ||
-                userLoginName == null || gender == null){
-            message.append("参数错误");
-            return makeMsg(response,message);
-        }
 
         if("".equals(userName) || userName.length() < 6){
             message.append("用户名格式错误");
